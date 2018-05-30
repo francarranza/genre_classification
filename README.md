@@ -1,5 +1,16 @@
 # genre_classification
 
+Un género musical es una categoría que reúne composiciones musicales que comparten criterios de afinidad tales como su función (música de danza, religiosa, cine), su instrumentación (vocal, instrumental, electrónica), su contexto social o el contenido de su letra. 
+
+La tarea de clasificación de género consiste en, dada una canción (audio o vector de factores latentes) predecir la categoría de género. En esta sección abordaremos canciones basadas en audio. Un sistema de clasificación, podría utilizarse para afinar el problema de cold start. Si una persona sube a YouTube un cover de violín de una canción de Rock, se podrá predecir su género y que esto ayude a una futura recomendación de otro usuario con gustos similares.
+
+A la hora de clasificar por género, nos encontramos con varios problemas:
+
+1. La subjetividad de la categorización: Hay casos donde una canción pertenece a varios géneros. Cada género puede a su vez, tener muchos subgéneros. Por ejemplo el Rock puede subdividirse en: alternativo, folk, indie, hard, punk, entre otros.
+2. A nivel audio, la variación de género en una misma canción: Por ejemplo la canción Faith de George Michael. Comienza con una sección de órgano de iglesia, lo cual podría confundirse con una género religioso o clásico. El resto de la canción, es claro que pertenece a una mezcla de Pop, Rock, Funk, entre otros.
+3. Hay una brecha semántica importante entre la señal de audio y el género.
+
+![alt text](https://github.com/francarranza/genre_classification/raw/master/report/melspectrograms_samples.png)
 
 Nuestro enfoque será basado en el contenido. Utilizaremos un subset del dataset  mencionado en la sección preliminares, el GTZAN. Es una colección de 500 audios de canciones de 30 segundos clasificados en 5 géneros: Metal, classical, hip hop, country, reggae. Tomaremos los primeros 9 segundos de cada canción, resultando en 388 frames de tiempo.
 
