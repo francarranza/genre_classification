@@ -188,7 +188,7 @@ plt.title('Model accuracy')
 plt.ylabel('accuracy')
 plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='upper left')
-plt.savefig('model_acc_classification.png', dpi=300)
+plt.savefig('report/training_accuracy.png', dpi=300)
 plt.show()
 
 # summarize history for loss
@@ -198,7 +198,7 @@ plt.title('Model loss')
 plt.ylabel('loss')
 plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='upper left')
-plt.savefig('model_loss_classification.png', dpi=300)
+plt.savefig('report/training_loss.png', dpi=300)
 plt.show()
 
 # Evaluate
@@ -226,5 +226,5 @@ plot_confusion_matrix(
     normalize=True,
     title='Normalized confusion matrix')
 plt.tight_layout()
-plt.savefig('confusion_matrix_classification.png', dpi=300)
+plt.savefig('report/confusion_matrix.png', dpi=300)
 plt.show()
