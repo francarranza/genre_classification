@@ -10,7 +10,7 @@ A la hora de clasificar por género, nos encontramos con varios problemas:
 2. A nivel audio, la variación de género en una misma canción: Por ejemplo la canción Faith de George Michael. Comienza con una sección de órgano de iglesia, lo cual podría confundirse con una género religioso o clásico. El resto de la canción, es claro que pertenece a una mezcla de Pop, Rock, Funk, entre otros.
 3. Hay una brecha semántica importante entre la señal de audio y el género.
 
-Nuestro enfoque será basado en el contenido. Utilizaremos un subset del dataset  mencionado en la sección preliminares, el GTZAN. Es una colección de 500 audios de canciones de 30 segundos clasificados en 5 géneros: Metal, classical, hip hop, country, reggae. Tomaremos los primeros 9 segundos de cada canción, resultando en 388 frames de tiempo.
+Nuestro enfoque será basado en el contenido. Utilizaremos un subset del dataset  mencionado en la sección preliminares, el  [GTZAN](http://marsyasweb.appspot.com/download/data_sets/). Es una colección de 500 audios de canciones de 30 segundos clasificados en 5 géneros: Metal, classical, hip hop, country, reggae. Tomaremos los primeros 9 segundos de cada canción, resultando en 388 frames de tiempo.
 
 ![alt text](https://github.com/francarranza/genre_classification/raw/master/report/melspectrograms_samples.jpg)
 
