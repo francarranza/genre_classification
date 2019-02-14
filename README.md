@@ -1,39 +1,39 @@
 # genre_classification
 
-Un género musical es una categoría que reúne composiciones musicales que comparten criterios de afinidad tales como su función (música de danza, religiosa, cine), su instrumentación (vocal, instrumental, electrónica), su contexto social o el contenido de su letra. 
+A musical genre is a category that brings together musical compositions that share criteria of affinity such as its function (dance music, religious, cinema), its instrumentation (vocal, instrumental, electronic), its social context or the content of its lyrics.
 
-La tarea de clasificación de género consiste en, dada una canción (audio o vector de factores latentes) predecir la categoría de género. En esta sección abordaremos canciones basadas en audio. Un sistema de clasificación, podría utilizarse para afinar el problema de cold start. Si una persona sube a YouTube un cover de violín de una canción de Rock, se podrá predecir su género y que esto ayude a una futura recomendación de otro usuario con gustos similares.
+The task of gender classification consists of, given a song (audio or vector of latent factors) predicting the gender category. In this section we will cover songs based on audio. A classification system could be used to refine the cold start problem. If a person uploads a violin cover of a Rock song to YouTube, their gender can be predicted and this helps a future recommendation from another user with similar tastes.
 
-A la hora de clasificar por género, nos encontramos con varios problemas:
+When classifying by gender, we find several problems:
 
-1. La subjetividad de la categorización: Hay casos donde una canción pertenece a varios géneros. Cada género puede a su vez, tener muchos subgéneros. Por ejemplo el Rock puede subdividirse en: alternativo, folk, indie, hard, punk, entre otros.
-2. A nivel audio, la variación de género en una misma canción: Por ejemplo la canción Faith de George Michael. Comienza con una sección de órgano de iglesia, lo cual podría confundirse con una género religioso o clásico. El resto de la canción, es claro que pertenece a una mezcla de Pop, Rock, Funk, entre otros.
-3. Hay una brecha semántica importante entre la señal de audio y el género.
+1. The subjectivity of categorization: There are cases where a song belongs to several genres. Each genre can, in turn, have many subgenres. For example, Rock can be subdivided into: alternative, folk, indie, hard, punk, among others.
+2. Audio level, the variation of gender in the same song: For example the song Faith by George Michael. It begins with a church organ section, which could be confused with a religious or classical genre. The rest of the song, it is clear that it belongs to a mixture of Pop, Rock, Funk, among others.
+3. There is a significant semantic gap between the audio signal and the genre.
 
-Nuestro enfoque será basado en el contenido. Utilizaremos un subset del dataset  mencionado en la sección preliminares, el  [GTZAN](http://marsyasweb.appspot.com/download/data_sets/). Es una colección de 500 audios de canciones de 30 segundos clasificados en 5 géneros: Metal, classical, hip hop, country, reggae. Tomaremos los primeros 9 segundos de cada canción, resultando en 388 frames de tiempo.
+My approach will be based on the content. We will use a subset of the dataset mentioned in the preliminary section, the [GTZAN](http://marsyasweb.appspot.com/download/data_sets/). It is a collection of 500 audios of songs of 30 seconds classified in 5 genres: Metal, classical, hip hop, country, reggae. We will take the first 9 seconds of each song, resulting in 388 frames of time.
 
 ![alt text](https://github.com/francarranza/genre_classification/raw/master/report/melspectrograms_samples.jpg)
 
 ## Approach
 
-1. Convertimos los audios a espectrogramas de mel: 1000x388x128 (canciones x tiempo x frecuencia)
-2. Dividimos y mezclamos los audios en train, test, validation (75%, 15%, 10%).
-3. Entrenamos una CNN con el training set usando el validation set.
-4. Medimos la precisión con el testing set.
-5. Presentamos los resultados.
+1. We convert the audios to mel spectrograms: 1000x388x128 (songs x time x frequency)
+2. We divide and mix the audios in train, test, validation (75%, 15%, 10%).
+3. We train a CNN with the training set using the validation set.
+4. We measure the accuracy with the testing set.
+5. We present the results.
 
-La CNN consta de 2 capas convolutivas intermedias de 128 filtros cada una con un Pooling size de 3 y Dropout para agregar variación a los datos y prevenir overfitting. Encima de esto, apilamos una red densa de 128 neuronas completamente conectada. La última capa, será una densa de 5 neuronas con la función de activación softmax que representan los 5 géneros a predecir. La red fue compilada con SGD como optimizador y categorical cross entropy como función de loss.
+CNN consists of 2 intermediate convolutional layers of 128 filters each with a Pooling size of 3 and Dropout to add variation to the data and prevent overfitting. On top of this, we stacked a dense network of 128 neurons completely connected. The last layer will be a dense array of 5 neurons with softmax activation function representing the 5 genera to be predicted. The network was compiled with SGD as an optimizer and categorical cross entropy as a function of loss.
 
 ## Resultados
 
-La red fue entrenada durante 27 épocas, dando una precisión del 80% sobre el training set, 57% sobre el validation set y 70% sobre el testing set. 
+The network was trained during 27 seasons, giving an accuracy of 80% on the training set, 57% on the validation set and 70% on the testing set.
 
 ![alt text](https://github.com/francarranza/genre_classification/raw/master/report/training_accuracy.png)
 
 ![alt text](https://github.com/francarranza/genre_classification/raw/master/report/training_loss.png)
 
-Una matriz de confusión es una herramienta que permite la visualización del desempeño de un algoritmo que se emplea en aprendizaje automático. Cada columna de la matriz representa el número de predicciones de cada clase, mientras que cada fila representa a las instancias en la clase real. Uno de los beneficios de las matrices de confusión es que facilitan ver si el sistema está confundiendo dos clases.
+A confusion matrix is a tool that allows the visualization of the performance of an algorithm that is used in machine learning. Each column of the matrix represents the number of predictions of each class, while each row represents the instances in the real class. One of the benefits of confusion matrices is that they make it easy to see if the system is confusing two classes.
 
 ![alt text](https://github.com/francarranza/genre_classification/raw/master/report/confusion_matrix.png)
 
-En nuestro caso podemos ver que para los géneros: Country, metal y classical, el sistema clasifica muy bien. Ahora, el sistema confunde bastante el género reggae con hip hop, logrando una precisión más reducida del 56% y 57% respectivamente. Por último, se puede ver algo de confusión entre classical y country lo cual es curioso.
+In our case we can see that for the genres: Country, metal and classical, the system classifies very well. Now, the system confuses the reggae genre with hip hop, achieving a reduced precision of 56% and 57% respectively. Finally, you can see some confusion between classical and country which is curious.
