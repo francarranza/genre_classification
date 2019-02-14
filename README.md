@@ -24,7 +24,7 @@ My approach will be based on the content. We will use a subset of the dataset me
 
 CNN consists of 2 intermediate convolutional layers of 128 filters each with a Pooling size of 3 and Dropout to add variation to the data and prevent overfitting. On top of this, we stacked a dense network of 128 neurons completely connected. The last layer will be a dense array of 5 neurons with softmax activation function representing the 5 genera to be predicted. The network was compiled with SGD as an optimizer and categorical cross entropy as a function of loss.
 
-## Resultados
+## Results
 
 The network was trained during 27 seasons, giving an accuracy of 80% on the training set, 57% on the validation set and 70% on the testing set.
 
